@@ -1,0 +1,61 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="app-shell">
+  <header class="app-header">
+    <div class="header-brand">
+      <span class="brand-name" i18n="@@brandName">Company Name</span>
+    </div>
+
+    <nav class="header-nav">
+      <a href="#" class="nav-link" i18n="@@navHome">Home</a>
+      <a href="#" class="nav-link" i18n="@@navTopics">Topics</a>
+      <a href="#" class="nav-link" i18n="@@navArchive">Archive</a>
+      <a href="#" class="nav-link" i18n="@@navAbout">About</a>
+    </nav>
+
+    <div class="header-actions"></div>
+  </header>
+
+  <div class="app-body">
+    <aside class="app-sidebar">
+      <div class="sidebar-section">
+        <a href="#" class="sidebar-item" i18n="@@sideDashboard">Dashboard</a>
+        <a href="#" class="sidebar-item" i18n="@@sideArticles">Articles</a>
+        <a href="#" class="sidebar-item" i18n="@@sideCategories">Categories</a>
+        <a href="#" class="sidebar-item" i18n="@@sideProfile">Profile</a>
+        <a href="#" class="sidebar-item" i18n="@@sideSettings">Settings</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <router-outlet></router-outlet>
+      <h2 i18n="@@welcomeHeader">Welcome</h2>
+      <p i18n="@@mainContentDesc">Main content area</p>
+    </main>
+
+    <aside class="app-ads">
+      <p class="ads-header-label" i18n="@@adsLabel">Sponsored</p>
+
+      <div class="ad-unit ad-tall">
+        <span class="ad-label" i18n="@@adPlaceholder">Advertisement</span>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+<router-outlet />
