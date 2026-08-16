@@ -1,0 +1,51 @@
+<div class="component-wrapper">
+  <div class="component-header">
+    <h2 class="component-title">Account Summary</h2>
+    <p class="component-desc">Fetch a summary for a given account number.</p>
+  </div>
+
+  <div class="search-card">
+    <div class="search-row">
+      <input [(ngModel)]="accountNumber" placeholder="Enter account number (8 characters)" (keyup.enter)="search()" />
+      <button class="btn-primary" (click)="search()" [disabled]="loading()">
+        {{ loading() ? 'Loading...' : 'Get Summary' }}
+      </button>
+      <button class="btn-secondary" (click)="reset()">Reset</button>
+    </div>
+  </div>
+
+  <div class="result-card" *ngIf="result()">
+    <p class="result-title">Account Summary</p>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <span class="summary-key">Account Number</span>
+        <span class="summary-value">{{ result().data?.accountNumber }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">Balance</span>
+        <span class="summary-value balance">{{ result().data?.balance }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">Account Type</span>
+        <span class="summary-value">{{ result().data?.accountType }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">Opening Date</span>
+        <span class="summary-value">{{ result().data?.openingDate }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">Customer Name</span>
+        <span class="summary-value">{{ result().data?.customerName }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">Customer Email</span>
+        <span class="summary-value">{{ result().data?.customerEmail }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card error" *ngIf="error()">
+    <p class="result-title">Error Fetching</p>
+    <p>{{ error() }}</p>
+  </div>
+</div>

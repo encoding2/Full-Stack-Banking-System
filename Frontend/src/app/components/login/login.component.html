@@ -1,0 +1,30 @@
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-brand">
+      <img src="assets/bank-logo.jpg" alt="Logo" class="login-logo" onerror="this.style.display='none'" />
+      <span class="brand-name">Saving Account</span>
+    </div>
+
+    <div class="session-banner" *ngIf="sessionExpiredMsg()">
+      {{ sessionExpiredMsg() }}
+    </div>
+
+    <div class="form-group">
+      <label>Username</label>
+      <input [(ngModel)]="username" type="text" placeholder="Enter your username" (keyup.enter)="submit()" />
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input [(ngModel)]="password" type="password" placeholder="Enter your password" (keyup.enter)="submit()" />
+    </div>
+
+    <div class="error-banner" *ngIf="error()">
+      {{ error() }}
+    </div>
+
+    <button class="btn-submit" (click)="submit()" [disabled]="loading()">
+      {{ loading() ? 'Signing in...' : 'Sign In' }}
+    </button>
+  </div>
+</div>

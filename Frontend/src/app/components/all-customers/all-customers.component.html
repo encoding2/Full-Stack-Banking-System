@@ -1,0 +1,48 @@
+<div class="component-wrapper">
+  <div class="component-header">
+    <div>
+      <h2 class="component-title">All Customers</h2>
+      <p class="component-desc">View all registered customers.</p>
+    </div>
+    <button class="btn-refresh" (click)="load()" [disabled]="loading()">Refresh</button>
+  </div>
+
+  <div class="loading-state" *ngIf="loading()">Loading customers...</div>
+
+  <div class="result-card error" *ngIf="error()">
+    <p>{{ error() }}</p>
+  </div>
+
+  <div class="table-wrapper" *ngIf="!loading() && customers().length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>PAN</th>
+          <th>Aadhaar</th>
+          <th>Date of Birth</th>
+          <th>KYC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of customers()">
+          <td>{{ c.id }}</td>
+          <td>{{ c.name }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.phone }}</td>
+          <td>{{ c.pan }}</td>
+          <td>{{ c.aadhaar }}</td>
+          <td>{{ c.dateOfBirth }}</td>
+          <td>{{ c.kycStatus ? 'Verified' : 'Not Verified' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading() && customers().length === 0 && !error()">
+    <p>No customers found. Create one first!</p>
+  </div>
+</div>

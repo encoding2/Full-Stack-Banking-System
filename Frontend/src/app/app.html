@@ -1,0 +1,47 @@
+<div class="app-shell">
+  <ng-container *ngIf="authService.isLoggedIn(); else loginView">
+    <header class="app-header">
+      <div class="header-brand">
+        <img src="assets/bank.jpg" alt="Logo" class="brand-logo" onerror="this.style.display='none'" />
+        <span class="brand-name">Saving Account</span>
+      </div>
+      <div class="header-actions">
+        <span class="welcome-text">{{ authService.getUsername() }}</span>
+        <button class="btn-logout" (click)="logout()">Logout</button>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <aside class="app-sidebar">
+        <p class="sidebar-label">CUSTOMERS</p>
+        <div class="sidebar-section">
+          <a routerLink="/create-customer" routerLinkActive="active" class="sidebar-item">Create Customer</a>
+          <a routerLink="/get-customer" routerLinkActive="active" class="sidebar-item">Get by ID</a>
+          <a routerLink="/all-customers" routerLinkActive="active" class="sidebar-item">All Customers</a>
+          <a routerLink="/find-by-email" routerLinkActive="active" class="sidebar-item">Find by Email</a>
+          <a routerLink="/find-by-phone" routerLinkActive="active" class="sidebar-item">Find by Phone</a>
+        </div>
+        <p class="sidebar-label" style="margin-top: 20px;">ACCOUNTS</p>
+        <div class="sidebar-section">
+          <a routerLink="/create-account" routerLinkActive="active" class="sidebar-item">Create Account</a>
+          <a routerLink="/acc-summary" routerLinkActive="active" class="sidebar-item">Account Summary</a>
+          <a routerLink="/max-balance" routerLinkActive="active" class="sidebar-item">Max Balance</a>
+        </div>
+      </aside>
+
+      <main class="app-main">
+        <router-outlet />
+      </main>
+
+      <aside class="app-ads">
+        <p class="ads-header-label">Sponsored</p>
+        <div class="ad-unit ad-tall"><span class="ad-label">Advertisement</span></div>
+        <div class="ad-unit ad-medium"><span class="ad-label">Advertisement</span></div>
+      </aside>
+    </div>
+  </ng-container>
+
+  <ng-template #loginView>
+    <router-outlet />
+  </ng-template>
+</div>

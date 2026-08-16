@@ -1,0 +1,49 @@
+<div class="component-wrapper">
+  <div class="component-header">
+    <h2 class="component-title">Create Account</h2>
+    <p class="component-desc">Add a bank account to an existing customer.</p>
+  </div>
+
+  <div class="form-card">
+    <div class="form-group full-width">
+      <label>Customer ID</label>
+      <input [(ngModel)]="customerId" type="number" placeholder="Enter the customer's ID" />
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Account Number</label>
+        <input [(ngModel)]="form.accountNumber" placeholder="8-character account number" />
+      </div>
+      <div class="form-group">
+        <label>Initial Balance</label>
+        <input [(ngModel)]="form.balance" type="number" placeholder="e.g. 5000" />
+      </div>
+      <div class="form-group">
+        <label>Account Type</label>
+        <select [(ngModel)]="form.accountTypeId">
+          <option value="" disabled selected>Select account type</option>
+          <option value="1">Savings</option>
+          <option value="2">Current</option>
+          <option value="3">Salary</option>
+          <option value="4">Fixed Deposit</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-primary" (click)="submit()" [disabled]="loading()">
+        {{ loading() ? 'Creating...' : 'Create Account' }}
+      </button>
+      <button class="btn-secondary" (click)="reset()">Reset</button>
+    </div>
+  </div>
+
+  <div class="result-card success" *ngIf="result()">
+    <p class="result-title">Account Created Successfully</p>
+    <p class="result-message">{{ result().message }}</p>
+  </div>
+
+  <div class="result-card error" *ngIf="error()">
+    <p class="result-title">Error Creating Account</p>
+    <p>{{ error() }}</p>
+  </div>
+</div>

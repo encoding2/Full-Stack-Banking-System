@@ -1,0 +1,58 @@
+<div class="component-wrapper">
+  <div class="component-header">
+    <div>
+      <h2 class="component-title">Max Balance Customers</h2>
+      <p class="component-desc">Customers who hold the highest account balance.</p>
+    </div>
+    <button class="btn-refresh" (click)="load()" [disabled]="loading()">Refresh</button>
+  </div>
+
+  <div class="loading-state" *ngIf="loading()">Fetching data...</div>
+
+  <div class="result-card error" *ngIf="error()">
+    <p>{{ error() }}</p>
+  </div>
+
+  <div class="highlight-card" *ngIf="!loading() && maxBalance() !== null">
+    <span class="highlight-label">Highest Balance</span>
+    <span class="highlight-value">{{ maxBalance() }}</span>
+  </div>
+
+  <div class="table-wrapper" *ngIf="!loading() && customers().length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Account No.</th>
+          <th>Balance</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of customers()">
+          <td>{{ c.id }}</td>
+          <td>{{ c.name }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.phone }}</td>
+          <td>
+            <span *ngFor="let acc of c.accounts" class="acc-chip">{{ acc.accountNumber }}</span>
+            <span *ngIf="!c.accounts?.length" class="no-acc">—</span>
+          </td>
+          <td>
+            <span *ngFor="let acc of c.accounts" class="acc-chip balance">{{ acc.balance }}</span>
+          </td>
+          <td>
+            <span *ngFor="let acc of c.accounts" class="acc-chip">{{ acc.accountType?.typeName || acc.accountType }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading() && customers().length === 0 && !error()">
+    <p>No data found.</p>
+  </div>
+</div>

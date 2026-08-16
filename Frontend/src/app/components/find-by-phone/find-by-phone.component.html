@@ -1,0 +1,87 @@
+<div class="component-wrapper">
+  <div class="component-header">
+    <h2 class="component-title">Find by Phone</h2>
+    <p class="component-desc">Look up a customer by their phone number.</p>
+  </div>
+
+  <div class="search-card">
+    <div class="search-row">
+      <input [(ngModel)]="phone" type="tel" placeholder="Enter 10-digit phone number" (keyup.enter)="search()" />
+      <button class="btn-primary" (click)="search()" [disabled]="loading()">
+        {{ loading() ? 'Searching...' : 'Search' }}
+      </button>
+      <button class="btn-secondary" (click)="reset()">Reset</button>
+    </div>
+  </div>
+
+  <div class="result-card" *ngIf="result()">
+    <p class="result-title">Customer Found</p>
+    <div class="detail-grid">
+      <div class="detail-item">
+        <span class="detail-key">ID</span>
+        <span class="detail-value">{{ result().data?.id }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">Name</span>
+        <span class="detail-value">{{ result().data?.name }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">Email</span>
+        <span class="detail-value">{{ result().data?.email }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">Phone</span>
+        <span class="detail-value">{{ result().data?.phone }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">PAN</span>
+        <span class="detail-value">{{ result().data?.pan }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">Aadhaar</span>
+        <span class="detail-value">{{ result().data?.aadhaar }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">Date of Birth</span>
+        <span class="detail-value">{{ result().data?.dateOfBirth }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">KYC Status</span>
+        <span class="detail-value">{{ result().data?.kycStatus ? 'Verified' : 'Not Verified' }}</span>
+      </div>
+    </div>
+
+    <div class="accounts-section" *ngIf="result().data?.accounts?.length">
+      <p class="accounts-title">Linked Accounts ({{ result().data.accounts.length }})</p>
+      <div class="accounts-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Account No.</th>
+              <th>Balance</th>
+              <th>Type</th>
+              <th>Opening Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let acc of result().data.accounts">
+              <td>{{ acc.accountNumber }}</td>
+              <td class="balance">{{ acc.balance }}</td>
+              <td>{{ acc.accountType?.typeName || acc.accountType }}</td>
+              <td>{{ acc.openingDate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="no-accounts" *ngIf="!result().data?.accounts?.length">
+      <p>No accounts linked to this customer.</p>
+    </div>
+  </div>
+
+  <div class="result-card error" *ngIf="error()">
+    <p class="result-title">Error</p>
+    <p>{{ error() }}</p>
+  </div>
+</div>

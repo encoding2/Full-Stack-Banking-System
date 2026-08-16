@@ -1,0 +1,57 @@
+<div class="component-wrapper">
+  <div class="component-header">
+    <h2 class="component-title">Find by Email</h2>
+    <p class="component-desc">Look up a customer by their email address.
+    </p>
+  </div>
+
+  <div class="search-card">
+    <div class="search-row">
+      <input [(ngModel)]="email" type="email" placeholder="Enter customer email" (keyup.enter)="search()" />
+      <button class="btn-primary" (click)="search()" [disabled]="loading()">
+        {{ loading() ? 'Searching...' : 'Search' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="result-card" *ngIf="result()">
+    <p class="result-title">Customer Details Found!</p>
+    <div class="detail-grid">
+      <div class="detail-item">
+        <span class="detail-key">ID</span>
+        <span class="detail-value">{{ result().data?.id }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">Name</span>
+        <span class="detail-value">{{ result().data?.name }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">Email</span>
+        <span class="detail-value">{{ result().data?.email }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">Phone</span>
+        <span class="detail-value">{{ result().data?.phone }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">PAN</span>
+        <span class="detail-value">{{ result().data?.pan }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">Aadhaar</span>
+        <span class="detail-value">{{ result().data?.aadhaar }}</span>
+      </div>
+    </div>
+    <div class="accounts-section" *ngIf="result().data?.accounts?.length">
+      <p class="accounts-title">Linked Accounts ({{ result().data.accounts.length }})</p>
+      <div class="account-chip" *ngFor="let acc of result().data.accounts">
+        {{ acc.accountNumber }} — ₹{{ acc.balance }}
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card error" *ngIf="error()">
+    <p class="result-title">Error Fetching</p>
+    <p>{{ error() }}</p>
+  </div>
+</div>
